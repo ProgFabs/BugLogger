@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const connectDB = async () => {
   try {
       const conn = await mongoose.connect(
-        'mongodb+srv://fabs1234:fabs1234@fabscluster.agshs.mongodb.net/buglogger?retryWrites=true&w=majority', 
+        process.env.URI, 
         {
           useNewUrlParser: true,
           useCreateIndex: true,

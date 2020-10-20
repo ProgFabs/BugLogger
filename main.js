@@ -1,9 +1,11 @@
+const dotenv = require('dotenv')
 const path = require('path')
 const url = require('url')
 const { app, BrowserWindow, ipcMain, Menu } = require('electron')
 const Log = require('./models/Log');
 const connectDB = require('./config/db');
 
+dotenv.config();
 connectDB();
 
 let mainWindow
@@ -110,7 +112,7 @@ ipcMain.on('logs:load', sendLogs)
 async function sendLogs() {
 	try {
 		const logs = await Log.find().sort({ created: 1 });
-		mainWindow.webContents.send('logs:get', JSON.stringify(logs)); // Para não termos problemas, precisamos fazer o array virar um JSON
+		mainWindow.webContents.send('logs:get', JSON.stringify(logs)); 
 
 	} catch (err) {
 		console.log(err);
@@ -138,7 +140,7 @@ ipcMain.on('logs:delete', async (e, _id) => {
 async function clearLogs () {
 	try { 
 		await Log.deleteMany({});
-		mainWindow.webContents.send('logs:clear'); // Não usamos o sendlogs porque não haverá logs settados.
+		mainWindow.webContents.send('logs:clear'); 
 	} catch (err) {
 		console.log(err)
 	}
@@ -156,5 +158,5 @@ app.on('activate', () => {
 	}
 })
 
-// Stop error
+
 app.allowRendererProcessReuse = true
