@@ -21,6 +21,7 @@ BugLogger has a basic layout and two simple functionalities for creating and del
 ```
 $ npm install
 ```
+- Create a .env file on the root folder and set a "URI" variable with your MongoDB Atlas URI.
 - Run the application using ```npm run start```.
 
 If everything goes well, the app should open it's window.
